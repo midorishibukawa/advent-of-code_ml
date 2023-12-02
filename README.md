@@ -8,7 +8,21 @@ you can find my solutions in the `lib` directory, grouped by year, or by clickin
 
 ## running the web server
 
-the `bin` directory also provides a simple https web server written using `dream` and `htmx`, which you can run by using the following commands:
+the `bin` directory also provides a simple https web server written using [dream](https://aantron.github.io/dream/) and [htmx](https://htmx.org/).
+
+in order to run the server, you'll first need to install its dependencies. if you're on nix, the `flake.nix` provide will setup everything for you by simply running the following command:
+
+```
+nix develop
+```
+
+otherwise, you'll need both [dune](https://dune.build/) and [opam](https://opam.ocaml.org/) installed on your system, as well as the following opam packages:
+
+```
+ocaml core dune dream crunch
+```
+
+once you've got everything you need, you can start the web server by using the following commands:
 
 ```
 dune build && dune exec advent_of_code
