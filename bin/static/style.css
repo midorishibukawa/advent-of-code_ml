@@ -1,0 +1,39 @@
+@import './reset.css';
+
+:root {
+    --mono: 'JetBrains Mono', mono;
+}
+
+html {
+    font-family: var(--mono);
+}
+
+body {
+    display: grid;
+    place-items: start center;
+    grid-template-rows: fit-content(100%);
+}
+
+main {
+    display: grid;
+    place-items: start center;
+    max-width: 720px;
+    width: 100%;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+form {
+    display: grid;
+    gap: 1rem;
+    grid-column-template: auto;
+}
+
+nav {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    width: 100%;
+}
