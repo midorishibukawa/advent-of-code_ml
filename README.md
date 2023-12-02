@@ -10,7 +10,7 @@ you can find my solutions in the `lib` directory, grouped by year, or by clickin
 
 the `bin` directory also provides a simple https web server written using [dream](https://aantron.github.io/dream/) and [htmx](https://htmx.org/).
 
-in order to run the server, you'll first need to install its dependencies. if you're on nix, the `flake.nix` provide will setup everything for you by simply running the following command:
+in order to run the server, you'll first need to install its dependencies. if you're using the [nix](https://nixos.org/) package manager, the `flake.nix` provided will setup everything for you by simply running the following command:
 
 ```
 nix develop
