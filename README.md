@@ -4,7 +4,7 @@ hello! these are my `advent of code` solutions in ocaml.
 
 this (2023) is my first year participating in the challenge while it's still ongoing (and I'm already a day late!), but I do intend to implement solutions for past years challenges when possible.
 
-you can find my solutions in the `lib` directory, grouped by year, or by clicking on the links bellow. 
+you can find my solutions in the `lib` directory, grouped by year, or by clicking on the links at the bottom of this README. 
 
 ## running the web server
 
