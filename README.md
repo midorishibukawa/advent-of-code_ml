@@ -6,8 +6,6 @@ this (2023) is my first year participating in the challenge while it's still ong
 
 you can find my solutions in the `lib` directory, grouped by year, or by clicking on the links bellow. 
 
----
-
 ## running the web server
 
 the `bin` directory also provides a simple https web server written using `dream` and `htmx`, which you can run by using the following commands:
@@ -22,13 +20,11 @@ or
 dune build -w @run
 ```
 
-the web server is set up to listen on port `8080`
-
----
+the web server is set up to listen on `https://localhost:8080`
 
 ## Y2023:
 
-- [x] [01](lib/y2023/day01.ml)★☆
+- [x] [01★☆](lib/y2023/day01.ml)
 - [ ] 02☆☆
 - [ ] 03☆☆
 - [ ] 04☆☆
