@@ -37,8 +37,14 @@ let form ~endpoint ~req =
             action="<%s endpoint %>"
             method="POST"> 
         <%s! Dream.csrf_tag req %>
-        <label  for="input">input</label>
-        <textarea  id="input" name="input"></textarea>
+        <label for="input">input</label>
+        <textarea id="input" name="input"></textarea>
+        <section id="type">
+            <input type="radio" id="bonus" name="bonus" value="0" checked />
+            <label for="simple">simple</label>
+            <input type="radio" id="bonus" name="bonus" value="1" />
+            <label for="bonus">bonus</label>
+        </section>
         <button type="submit">submit</button>
     </form>
 

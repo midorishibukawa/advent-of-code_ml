@@ -1,3 +1,4 @@
+module C = Core
 module D = Dream
 module T = Templates
 module Y23 = Y2023
@@ -24,11 +25,13 @@ let () =
             @@ T.form ~endpoint:(D.param req "day") ~req);
 
         D.post "/:day" (fun req ->
-            let handle_form =
+            let to_html content = content |> T.p |> D.html in
+            let handle_form f =
                 match%lwt D.form req with
-                | `Ok [ "input", input] -> input |> Y2023.D01.solve |> T.p |> D.html
+                | `Ok [ "bonus", bonus
+                      ; "input", input ] -> input |> f ~bonus:(bonus = "1") |> to_html
                 | _                    -> D.html ~status:`Bad_Request @@ "" in
             match (D.param req "day") with
-            | "1" -> handle_form
+            | "1" -> handle_form Y2023.D01.solve 
             | _ -> handle_htmx ~req @@ "");
     ]
