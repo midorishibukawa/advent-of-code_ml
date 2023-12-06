@@ -2,16 +2,24 @@
 
 :root {
     --mono: 'JetBrains Mono', mono;
+    --fade: grey;
 }
 
 html {
     font-family: var(--mono);
+    display: grid;
+    place-items: start center;
 }
 
 body {
     display: grid;
     place-items: start center;
-    grid-template-rows: fit-content(100%);
+    max-width: 720px;
+    grid-template:
+    "title" fit-content(100%)
+    "nav"   fit-content(100%)
+    "main"  fit-content(100%) / auto;
+    gap: 1rem;
 }
 
 main {
@@ -23,17 +31,24 @@ main {
 
 h1 {
     font-size: 3rem;
-    margin-bottom: 1rem;
+    padding: 1rem;
 }
 
 form {
     display: grid;
     gap: 1rem;
     grid-column-template: auto;
+    padding: 1rem;
 }
 
 nav {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     width: 100%;
+}
+
+a.disabled {
+    pointer-events: none;
+    color: var(--fade);
+    text-decoration: none;
 }

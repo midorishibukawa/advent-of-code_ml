@@ -3,8 +3,10 @@ module D = Dream
 module T = Templates
 module Y23 = Y2023
 
+let solved = 2;;
+
 let () =
-    let days_nav = T.nav @@ List.init 31 @@ fun x -> string_of_int @@ x + 1 in
+    let days_nav = T.nav @@ List.init 31 @@ fun x -> (string_of_int @@ x + 1, x + 1 > solved) in
     let handle_htmx ~req body =
         match D.header req "HX-Request" with
         | None   -> D.html @@ T.page ~title:"advent of code" ~nav:days_nav ~body
@@ -21,17 +23,21 @@ let () =
             @@ "");
 
         D.get "/:day" (fun req ->
-            handle_htmx ~req
-            @@ T.form ~endpoint:(D.param req "day") ~req);
+            let opt_day = int_of_string_opt @@ D.param req "day" in
+            let day () = Lazy.force @@ lazy (Option.get opt_day) in
+            if Option.is_some opt_day && day () > 0 && day () <= 2
+            then handle_htmx ~req @@ T.form ~endpoint:(D.param req "day") ~req
+            else D.html ~status:`Not_Found "");
 
         D.post "/:day" (fun req ->
-            let to_html content = content |> T.p |> D.html in
             let handle_form f =
                 match%lwt D.form req with
                 | `Ok [ "bonus", bonus
-                      ; "input", input ] -> input |> f ~bonus:(bonus = "1") |> to_html
-                | _                    -> D.html ~status:`Bad_Request @@ "" in
+                      ; "input", input ] -> 
+                          input |> f ~bonus:(bonus = "1") |> T.p |> D.html
+                | _                    -> D.html ~status:`Bad_Request "" in
             match (D.param req "day") with
-            | "1" -> handle_form Y2023.D01.solve 
-            | _ -> handle_htmx ~req @@ "");
+            | "1" -> handle_form Y2023.d01
+            | "2" -> handle_form Y2023.d02
+            | _ -> D.html ~status:`Not_Found "");
     ]

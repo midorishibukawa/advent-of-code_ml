@@ -22,10 +22,12 @@ let page ~title ~nav ~body =
 
 let nav ps =
     <nav>
-%   ps |> List.iter begin fun p ->
+%   ps |> List.iter begin fun (p, disabled) ->
         <a href="<%s p %>"
             hx-boost="true"
-            hx-target="main">
+            hx-target="main"
+            <%s if disabled then "class=disabled" else "" %>
+            >
             <%s p %>
         </a>
 %   end;
