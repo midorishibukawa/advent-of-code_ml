@@ -1,8 +1,11 @@
-open Core
+module C = Core.Char
+module L = Core.List 
+module M = Core.Map 
+module S = Core.String
 
 let digit_map = 
-    Map.of_alist_exn 
-    (module String)
+    M.of_alist_exn 
+    (module S)
     [ "one"  , 1
     ; "two"  , 2
     ; "three", 3
@@ -14,44 +17,44 @@ let digit_map =
     ; "nine" , 9 ];;
 
 let get_digit_opt xs =
-    let open Base.Container.Continue_or_stop in
-    List.fold_until 
-        (Map.keys digit_map)
+    let open Core.Continue_or_stop in
+    L.fold_until 
+        (M.keys digit_map)
         ~init:None
         ~f:(fun _ prefix -> 
-                if String.is_prefix (List.take xs 5 |> String.of_char_list) ~prefix
+                if S.is_prefix (L.take xs 5 |> S.of_char_list) ~prefix
                 then Stop (Some prefix)
                 else Continue None)
-        ~finish:(fun acc -> acc);;
+        ~finish:Fun.id;;
 
-let rec solve ?(y=0) ?(first=0) ?(last=0) ?(bonus=false) xs =
-    let sum_val = lazy (first * 10 + last) in
+let rec solve ?(y=0) ?(first=0) ?(last=0) ~bonus xs =
+    let sum_val () = first * 10 + last in
     match xs with
-        | [] -> y + Lazy.force sum_val
-        | ('\n'::xs) -> solve ~y:(y + Lazy.force sum_val) ~bonus xs
+        | [] -> y + sum_val ()
+        | ('\n'::xs) -> solve ~y:(y + sum_val ()) ~bonus xs
         | (hd::tl) -> 
                 if bonus 
                 then solve_bonus ~y ~first ~last hd tl xs
                 else parse ~y ~first ~last ~bonus hd tl
 
 and parse ~y ~first ~last ~bonus hd tl =
-    if not @@ Char.is_digit hd
+    if not @@ C.is_digit hd
     then solve ~y ~first ~last ~bonus tl
     else 
-        let x = Char.get_digit_exn hd in
+        let x = C.get_digit_exn hd in
         let first = if first = 0 then x else first in 
         solve ~y ~first ~last:x ~bonus tl
 
 and solve_bonus ~y ~first ~last hd tl xs =
     match get_digit_opt xs with 
     | Some digit -> 
-            let x = Map.find_exn digit_map digit in
+            let x = M.find_exn digit_map digit in
             let first = if first = 0 then x else first in 
             solve ~y ~first ~last:x ~bonus:true tl
     | None -> parse ~y ~first ~last ~bonus:true hd tl;;
 
 let solve ~bonus str =
     str 
-    |> String.to_list 
+    |> S.to_list 
     |> solve ~bonus
     |> string_of_int;;
