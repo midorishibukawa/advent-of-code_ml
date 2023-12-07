@@ -34,7 +34,11 @@ let () =
                 match%lwt D.form req with
                 | `Ok [ "bonus", bonus
                       ; "input", input ] -> 
-                          input |> f ~bonus:(bonus = "1") |> T.p |> D.html
+                            input 
+                            |> f ~bonus:(bonus = "1") 
+                            |> string_of_int
+                            |> T.p 
+                            |> D.html
                 | _                    -> D.html ~status:`Bad_Request "" in
             match (D.param req "day") with
             | "1" -> handle_form Y2023.d01

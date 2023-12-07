@@ -123,5 +123,4 @@ let solve ~bonus str =
     let solve_bonus xs = solve_bonus xs in
     str 
     |> S.to_list 
-    |> (if bonus then solve_bonus else solve)
-    |> string_of_int
+    |> (if bonus then solve_bonus else solve);;
