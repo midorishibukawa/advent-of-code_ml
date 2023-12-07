@@ -56,5 +56,4 @@ and solve_bonus ~y ~first ~last hd tl xs =
 let solve ~bonus str =
     str 
     |> S.to_list 
-    |> solve ~bonus
-    |> string_of_int;;
+    |> solve ~bonus;;
