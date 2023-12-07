@@ -19,7 +19,7 @@
  (name advent_of_code)
  (synopsis "my advent of code solutions")
  (description "my advent of code solutions")
- (depends ocaml core dune dream crunch)
+ (depends ocaml core dune dream crunch ppx_inline_test)
  (tags
   (topics "advent of code")))
 
