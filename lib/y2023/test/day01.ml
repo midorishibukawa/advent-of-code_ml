@@ -1,7 +1,20 @@
-open Core
-
 let d01a = Y2023.d01 ~bonus:false;;
 let d01b = Y2023.d01 ~bonus:true;;
+
+let example_a =
+"1abc2
+pqr3stu8vwx
+a1b2c3d4e5f
+treb7uchet";;
+
+let example_b =
+"two1nine
+eightwothree
+abcone2threexyz
+xtwone3four
+4nineeightseven2
+zoneight234
+7pqrstsixteen"
 
 (* original question *)
 
@@ -19,9 +32,7 @@ let%test "with_padding" = d01a "    1a3c5    " = 15;;
 
 let%test "two_lines" = d01a "ab1cd2ef3gh\n4ij5kl6mn7" = 60;;
 
-let%test "example" =
-    let input = "1abc2\npqr3stu8vwx\na1b2c3d4e5f\ntreb7uchet" in 
-    d01a input = 142
+let%test "example" = d01a example_a = 142;;
 
 (* bonus question *)
 
@@ -43,6 +54,4 @@ let%test "with_padding_bonus" = d01b "    onea3cseven    " = 17;;
 
 let%test "two_lines_bonus" = d01b "abonecd2efthreegh\nfourij5kl6mnseven" = 60;;
 
-let%test "example_bonus" =
-    let input = "two1nine\neightwothree\nabcone2threexyz\nxtwone3four\n4nineeightseven2\nzoneight234\n7pqrstsixteen" in
-    d01b input = 281
+let%test "example_bonus" = d01b example_b = 281;;
