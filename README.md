@@ -1,6 +1,6 @@
 # advent of code (ocaml)
 
-hello! these are my `advent of code` solutions in ocaml.
+hello! these are my [advent of code](https://adventofcode.com) solutions in ocaml.
 
 this (2023) is my first year participating in the challenge while it's still ongoing (and I'm already a day late!), but I do intend to implement solutions for past years challenges when possible.
 
