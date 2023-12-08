@@ -17,4 +17,4 @@
 (rule
  (alias run)
  (action
-  (run advent_of_code args)))
+  (run advent_of_code)))

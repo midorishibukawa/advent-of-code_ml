@@ -1,22 +1,27 @@
 module C = Core
 module D = Dream
+module S = Static
 module T = Templates
 module Y23 = Y2023
 
 let solved = 2;;
 
 let () =
-    let days_nav = T.nav @@ List.init 31 @@ fun x -> (string_of_int @@ x + 1, x + 1 > solved) in
+    let nav = T.nav @@ List.init 25 @@ fun x -> (string_of_int @@ x + 1, x + 1 > solved) in
+    let loader _root path _request = 
+        match Static.read path with 
+        | None -> Dream.empty `Not_Found 
+        | Some asset -> D.respond asset in
     let handle_htmx ~req body =
         match D.header req "HX-Request" with
-        | None   -> D.html @@ T.page ~title:"advent of code" ~nav:days_nav ~body
+        | None   -> D.html @@ T.page ~title:"advent of code" ~nav ~body
         | Some _ -> D.html body in
     D.run ~tls:true
     @@ D.logger 
     @@ D.memory_sessions
     @@ D.router [
 
-        D.get "/static/**" @@ D.static "./static";
+        D.get "/static/**" @@ D.static ~loader "";
 
         D.get "/" (fun req -> 
             handle_htmx ~req
