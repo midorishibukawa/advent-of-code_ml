@@ -4,11 +4,11 @@ hello! these are my [advent of code](https://adventofcode.com) solutions in ocam
 
 this (2023) is my first year participating in the challenge while it's still ongoing (and I'm already a day late!), but I do intend to implement solutions for past years challenges when possible.
 
-you can find my solutions in the `lib` directory, grouped by year, or by clicking on the links at the bottom of this README. 
+you can find my solutions in the [lib](lib/) directory, grouped by year, or by clicking on the links at the bottom of this README. 
 
 ## running the web server
 
-the `bin` directory also provides a simple https web server written using [dream](https://aantron.github.io/dream/) and [htmx](https://htmx.org/).
+the [bin](bin/) directory also provides a simple https web server written using [dream](https://aantron.github.io/dream/) and [htmx](https://htmx.org/).
 
 in order to run the server, you'll first need to install its dependencies. if you're using the [nix](https://nixos.org/) package manager, the `flake.nix` provided will setup everything for you by simply running the following command:
 
