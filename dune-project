@@ -11,13 +11,13 @@
 
 (maintainers "midorishibukawa")
 
-(license "GPL v3.0")
+(license "GPL-3.0-only")
 
 ; (documentation https://url/to/documentation)
 
 (package
  (name advent_of_code)
- (synopsis "my advent of code solutions")
+ (synopsis "My advent of code solutions")
  (description "my advent of code solutions")
  (depends ocaml core dune dream crunch ppx_inline_test)
  (tags
