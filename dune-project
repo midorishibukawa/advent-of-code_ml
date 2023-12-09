@@ -1,4 +1,4 @@
-(lang dune 3.8)
+(lang dune 3.12)
 
 (name advent_of_code)
 
@@ -19,7 +19,7 @@
  (name advent_of_code)
  (synopsis "My advent of code solutions")
  (description "my advent of code solutions")
- (depends ocaml core dune dream crunch ppx_inline_test)
+ (depends ocaml batteries dune dream crunch ppx_inline_test)
  (tags
   (topics "advent of code")))
 
