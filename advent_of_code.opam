@@ -10,7 +10,7 @@ homepage: "https://github.com/midorishibukawa/advent-of-code_ml"
 bug-reports: "https://github.com/midorishibukawa/advent-of-code_ml/issues"
 depends: [
   "ocaml"
-  "core"
+  "batteries"
   "dune" {>= "3.12"}
   "dream"
   "crunch"

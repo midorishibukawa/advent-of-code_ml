@@ -1,31 +1,24 @@
-open Core
+open Batteries
+open Util
 
-let cube_map =
-    Map.of_alist_exn (module String)
+let cube_map = StringMap.of_list
     [ "red"  , 12
     ; "green", 13
     ; "blue" , 14 ];;
-
-let take n xs = List.take xs n;;
 
 let rec get_num ?(n=0) xs =
     match xs with
     | [] -> (n, xs)
     | (x::xs') ->
         if Char.is_digit x
-        then get_num ~n:(n * 10 + (Char.get_digit_exn x)) xs'
+        then get_num ~n:(n * 10 + (to_digit x)) xs'
         else (n, xs);; 
 
 let get_colour_qty str =
-    List.fold_until
-    (Map.keys cube_map)
-    ~init:0
-    ~f:(fun _ prefix ->
-        let open Core.Continue_or_stop in
-        if String.is_prefix ~prefix str
-        then Stop (Map.find_exn cube_map prefix)
-        else Continue (-999))
-    ~finish:Fun.id;;
+    let colour = 
+        try Enum.find (String.starts_with str) (StringMap.keys cube_map) 
+        with Not_found -> "" in 
+    try StringMap.find colour cube_map with Not_found -> 0;;
 
 let rec remove_til_next is_valid xs =
     match xs with
@@ -44,7 +37,7 @@ let rec remove_spaces xs =
 let is_valid qty xs =
     let colour_qty = 
         xs 
-        |> take 5 
+        |> List.take 5 
         |> String.of_list 
         |> get_colour_qty in
     let is_valid = colour_qty > 0 && qty <= colour_qty in 
@@ -71,25 +64,14 @@ let rec solve ?(y=0) ?(game=0) xs =
             else solve ~y ~game xs';;
 
 let get_colour str =
-    List.fold_until 
-    (Map.keys cube_map)
-    ~init:""
-    ~f:(fun _ prefix ->
-        let open Core.Continue_or_stop in
-        if String.is_prefix ~prefix str
-        then Stop prefix
-        else Continue "")
-    ~finish:Fun.id;;
+    try Enum.find (String.starts_with str) (StringMap.keys cube_map)
+    with Not_found -> "";;
 
-
-let rec solve_bonus ?(y=0) ?(map=Map.empty (module String)) xs =
+let rec solve_bonus ?(y=0) ?(map=StringMap.empty) xs =
     let product_of_map map =
-        if Map.is_empty map 
+        if StringMap.is_empty map 
         then 0
-        else Map.fold 
-            map 
-            ~init:1 
-            ~f:(fun ~key:_ ~data acc -> acc * data) in 
+        else map |> StringMap.values |> Enum.fold (fun acc qty -> acc * qty) 1 in 
     match xs with 
     | [] -> y + product_of_map map
     | ('\n'::xs') -> solve_bonus ~y:(y + product_of_map map) xs'
@@ -103,13 +85,13 @@ let rec solve_bonus ?(y=0) ?(map=Map.empty (module String)) xs =
                 let key = 
                     xs' 
                     |> remove_spaces
-                    |> take 5
+                    |> List.take 5
                     |> String.of_list 
                     |> get_colour in
-                let opt_data = Map.find map key in
+                let opt_data = StringMap.find_opt key map in
                 let map = 
-                    if Option.is_none opt_data || qty > (Option.value_exn opt_data)
-                    then Map.set map ~key ~data:qty 
+                    if Option.is_none opt_data || qty > (Option.get opt_data)
+                    then StringMap.add key qty map
                     else map in
                 solve_bonus ~y ~map xs'
             else solve_bonus ~y ~map xs';;
