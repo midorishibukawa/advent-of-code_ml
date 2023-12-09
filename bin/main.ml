@@ -1,4 +1,3 @@
-module C = Core
 module D = Dream
 module S = Static
 module T = Templates
