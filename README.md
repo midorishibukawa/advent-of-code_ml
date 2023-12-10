@@ -28,7 +28,7 @@ once you've got everything you need, you can start the web server by using the f
 dune build && dune exec advent_of_code
 ```
 
-or
+alternatively, you can build and run on watch mode with the following command:
 
 ```
 dune build -w @run
