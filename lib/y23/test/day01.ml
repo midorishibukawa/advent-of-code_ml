@@ -17,7 +17,7 @@ xtwone3four
 zoneight234
 7pqrstsixteen"
 
-(* original question *)
+(* p1 *)
 
 let%test "empty_string" = solve "" = 0;;
 
@@ -35,7 +35,7 @@ let%test "two_lines" = solve "ab1cd2ef3gh\n4ij5kl6mn7" = 60;;
 
 let%test "example" = solve example_a = 142;;
 
-(* bonus question *)
+(* p2 *)
 
 let%test "empty_string_bonus" = solve_bonus "" = 0;;
 
