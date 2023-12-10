@@ -2,10 +2,7 @@ name: Builds, tests & co
 
 on:
   pull_request:
-  push:
-  schedule:
-    # Prime the caches every Monday
-    - cron: 0 1 * * MON
+    types: [opened, reopened]
 
 permissions: read-all
 
