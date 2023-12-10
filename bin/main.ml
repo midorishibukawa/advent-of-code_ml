@@ -6,7 +6,7 @@ open Batteries
 let () =
     let nav = 
         (1--25) 
-        |> Enum.map (fun x -> (string_of_int x, x > List.length Y2023.solved)) 
+        |> Enum.map (fun x -> (string_of_int x, x > List.length Y23.solved)) 
         |> List.of_enum 
         |> T.nav in
     let handle_htmx ~req body =
@@ -34,7 +34,7 @@ let () =
             let day = D.param req "day" in 
             try 
                 let day' = int_of_string day - 1 in 
-                if day' >= 0 && day' < List.length Y2023.solved 
+                if day' >= 0 && day' < List.length Y23.solved 
                 then handle_htmx ~req @@ T.form ~endpoint:day ~req 
                 else raise Not_found 
             with _ -> D.html ~status:`Not_Found "");
@@ -54,7 +54,7 @@ let () =
             try
                 day 
                 |> int_of_string
-                |> Y2023.solve
+                |> Y23.solve
                 |> handle_form
             with _ -> D.html ~status:`Not_Found "");
     ]

@@ -1,5 +1,5 @@
 (library
-  (name y2023_test)
-  (libraries y2023)
+  (name y23_test)
+  (libraries y23)
   (inline_tests)
   (preprocess (pps ppx_inline_test)))

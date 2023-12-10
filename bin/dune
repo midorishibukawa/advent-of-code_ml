@@ -1,7 +1,7 @@
 (executable
  (public_name advent_of_code)
  (name main)
- (libraries dream y2023)
+ (libraries dream y23)
  (preprocess (pps lwt_ppx)))
 (rule
  (targets templates.ml)

@@ -1,4 +1,4 @@
-let d02 = Y2023.solve 2;;
+let d02 = Y23.solve 2;;
 let solve = d02 ~bonus:false;;
 let solve_bonus = d02 ~bonus:true;;
 
