@@ -19,7 +19,7 @@ nix develop
 otherwise, you'll need both [dune](https://dune.build/) and [opam](https://opam.ocaml.org/) installed on your system, as well as the following opam packages:
 
 ```
-ocaml core dune dream crunch
+ocaml batteries dune dream crunch ppx_inline_test
 ```
 
 once you've got everything you need, you can start the web server by using the following commands:
