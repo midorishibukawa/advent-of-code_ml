@@ -9,6 +9,8 @@ Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
 Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
 Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green";;
 
+(* p1 *)
+
 let%test "empty" = solve "" = 0;;
 
 let%test "one_line_ok" = solve "Game 99: 1 red, 2 blue, 3 green" = 99;;
@@ -24,6 +26,8 @@ let%test "multi_line_ok_ok" = solve "Game 17: 1 red, 2 blue, 3 green\nGame 19: 1
 let%test "multi_line_ok_nok" = solve "Game 17: 1 red, 2 blue, 3 green\nGame 19: 11 red, 99 blue, 13 green" = 17;;
 
 let%test "example" = solve example = 8;;
+
+(* p2 *)
 
 let%test "empty_bonus" = solve_bonus "" = 0;;
 
