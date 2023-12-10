@@ -1,5 +1,6 @@
-let solve = Y2023.d01 ~bonus:false;;
-let solve_bonus = Y2023.d01 ~bonus:true;;
+let d01 = Y2023.solve 1
+let solve = d01 ~bonus:false;;
+let solve_bonus = d01 ~bonus:true;;
 
 let example_a =
 "1abc2

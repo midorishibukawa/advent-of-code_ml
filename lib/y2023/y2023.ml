@@ -1,2 +1,8 @@
-let d01 = Day01.solve;;
-let d02 = Day02.solve;;
+open Batteries
+
+let solved =
+    [ Day01.solve 
+    ; Day02.solve 
+    ; Day03.solve ];;
+
+let solve n = List.at solved @@ n - 1

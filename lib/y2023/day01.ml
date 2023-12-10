@@ -13,8 +13,9 @@ let digit_map = StringMap.of_list
     ; "nine" , 9 ];;
 
 let get_digit_opt str =
-    let k = try Enum.find (String.starts_with str) (StringMap.keys digit_map)
-            with Not_found -> "" in
+    let k = 
+        try Enum.find (String.starts_with str) (StringMap.keys digit_map)
+        with Not_found -> "" in
     StringMap.find_opt k digit_map;;
 
 let rec solve ?(y=0) ?(first=0) ?(last=0) ~bonus xs =
