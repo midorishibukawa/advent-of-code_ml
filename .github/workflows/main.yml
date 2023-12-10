@@ -3,6 +3,9 @@ name: Builds, tests & co
 on:
   pull_request:
   push:
+    paths:
+      - '!**.md'
+      - '!.gitignore'
 
 permissions: read-all
 
