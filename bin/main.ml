@@ -6,13 +6,9 @@ open Batteries
 let () =
     let nav = 
         (1--25) 
-        |> Enum.map (fun x -> (string_of_int @@ x, x > List.length Y2023.solved)) 
+        |> Enum.map (fun x -> (string_of_int x, x > List.length Y2023.solved)) 
         |> List.of_enum 
         |> T.nav in
-    let loader _root path _request = 
-        match Static.read path with 
-        | None -> Dream.empty `Not_Found 
-        | Some asset -> D.respond asset in
     let handle_htmx ~req body =
         match D.header req "HX-Request" with
         | None   -> D.html @@ T.page ~title:"advent of code" ~nav ~body
@@ -22,7 +18,13 @@ let () =
     @@ D.memory_sessions
     @@ D.router [
 
-        D.get "/static/**" @@ D.static ~loader "";
+        D.get "/static/**" 
+            @@ D.static 
+            ~loader:(fun _root path _req -> 
+                match Static.read path with 
+                | None -> Dream.empty `Not_Found 
+                | Some asset -> D.respond asset)
+            "";
 
         D.get "/" (fun req -> 
             handle_htmx ~req
@@ -48,7 +50,7 @@ let () =
                             |> T.p 
                             |> D.html
                 | _ -> D.html ~status:`Bad_Request "" in
-            let day = (D.param req "day") in 
+            let day = D.param req "day" in 
             try
                 day 
                 |> int_of_string
