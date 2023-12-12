@@ -1,4 +1,4 @@
-# moved to gilab
+# moved to gitlab
 
 as of december 12th 2023, this repository has been moved to [gitlab](https://gitlab.com/midorishibukawa/advent-of-code_ml).
 
