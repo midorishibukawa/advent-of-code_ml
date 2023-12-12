@@ -2,9 +2,10 @@
   inputs = {
     opam-nix.url = "github:tweag/opam-nix";
     flake-utils.url = "github:numtide/flake-utils";
+    flake-compat.url = "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz";
     nixpkgs.follows = "opam-nix/nixpkgs";
   };
-  outputs = { self, flake-utils, opam-nix, nixpkgs }@inputs:
+  outputs = { self, flake-utils, opam-nix, nixpkgs, flake-compat }@inputs:
     # Don't forget to put the package name instead of `throw':
     let package = "advent_of_code"; 
     in flake-utils.lib.eachDefaultSystem (system:
