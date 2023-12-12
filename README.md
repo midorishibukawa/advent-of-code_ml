@@ -1,3 +1,7 @@
+# moved to gilab
+
+as of december 12th 2023, this repository has been moved to [gitlab](https://gitlab.com/midorishibukawa/advent-of-code_ml).
+
 # advent of code (ocaml)
 
 hello! these are my [advent of code](https://adventofcode.com) solutions in ocaml.
