@@ -1,0 +1,20 @@
+stages:
+  - build
+
+image: nixpkgs/nix-flakes:latest
+  
+variables:
+  CACHIX_CACHE_NAME: midorishibukawa-ml
+
+build:
+  before_script:
+    - nix profile install --accept-flake-config nixpkgs#cachix
+    - cachix use "$CACHIX_CACHE_NAME"
+
+  stage: build
+  artifacts:
+    paths:
+      - result/
+  script:
+    - cachix watch-exec $CACHIX_CACHE_NAME -- nix develop -c dune runtest
+    - cachix watch-exec $CACHIX_CACHE_NAME -- nix build
