@@ -1,10 +1,6 @@
 stages:
   - build
 
-image: 
-  name: nixpkgs/nix-flakes:latest
-  entrypoint: [""]
-  
 variables:
   CACHIX_CACHE_NAME: midorishibukawa-ml
 
