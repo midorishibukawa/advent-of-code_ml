@@ -6,8 +6,7 @@ variables:
 
 build:
   before_script:
-    - . "$HOME/.nix-profile/etc/profile.d/nix.sh"
-      # - nix profile install --accept-flake-config nixpkgs#cachix
+    - nix profile install --accept-flake-config nixpkgs#cachix
     - cachix use "$CACHIX_CACHE_NAME"
 
   stage: build
