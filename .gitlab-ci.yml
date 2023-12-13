@@ -14,7 +14,7 @@ build:
   stage: build
   artifacts:
     paths:
-      - result/
+      - result/bin/advent_of_code
   script:
     - cachix watch-exec $CACHIX_CACHE_NAME -- nix develop -c dune runtest
     - cachix watch-exec $CACHIX_CACHE_NAME -- nix build
