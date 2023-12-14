@@ -1,5 +1,4 @@
 stages:
-  - test
   - build
 
 variables:
@@ -10,12 +9,6 @@ variables:
     - nix profile install --accept-flake-config nixpkgs#cachix
     - cachix use "$CACHIX_CACHE_NAME"
 
-test:
-  extends: .before_script_template
-  stage: test
-  script:
-    - cachix watch-exec $CACHIX_CACHE_NAME -- nix develop -c dune runtest
-
 build:
   extends: .before_script_template
   stage: build
@@ -23,4 +16,5 @@ build:
     paths:
       - result/bin/advent_of_code
   script:
+    - cachix watch-exec $CACHIX_CACHE_NAME -- nix develop -c dune runtest
     - cachix watch-exec $CACHIX_CACHE_NAME -- nix build
