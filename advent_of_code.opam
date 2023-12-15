@@ -4,10 +4,10 @@ synopsis: "My advent of code solutions"
 description: "my advent of code solutions"
 maintainer: ["midorishibukawa"]
 authors: ["midori shibukawa"]
-license: "GPL-3.0-only"
+license: "GPL-3.0-or-later"
 tags: ["topics" "advent of code"]
-homepage: "https://github.com/midorishibukawa/advent-of-code_ml"
-bug-reports: "https://github.com/midorishibukawa/advent-of-code_ml/issues"
+homepage: "https://gitlab.com/midorishibukawa/advent-of-code_ml"
+bug-reports: "https://gitlab.com/midorishibukawa/advent-of-code_ml/issues"
 depends: [
   "ocaml"
   "batteries"
@@ -31,4 +31,4 @@ build: [
     "@doc" {with-doc}
   ]
 ]
-dev-repo: "git+https://github.com/midorishibukawa/advent-of-code_ml.git"
+dev-repo: "git+https://gitlab.com/midorishibukawa/advent-of-code_ml.git"
