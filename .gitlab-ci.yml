@@ -4,7 +4,7 @@ stages:
 variables:
   CACHIX_CACHE_NAME: midorishibukawa-ml
   PROJECT_NAME: advent_of_code
-  IMAGE_TAG: 0.4
+  IMAGE_TAG: 0.day4
   
 .before_script_template:
   before_script:
