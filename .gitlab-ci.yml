@@ -1,5 +1,5 @@
 stages:
-  - test
+  - build
 
 variables:
   CACHIX_CACHE_NAME: midorishibukawa-ml
@@ -13,16 +13,12 @@ variables:
 
 build:
   extends: .before_script_template
-  stage: test
+  stage: build
   artifacts:
     paths:
       - advent_of_code
   script:
+    - cachix watch-exec $CACHIX_CACHE_NAME -- nix develop .#$PROJECT_NAME -c dune runtest
     - cachix watch-exec $CACHIX_CACHE_NAME -- nix build
     - cp ./result/bin/$PROJECT_NAME .
 
-test:
-  extends: .before_script_template
-  stage: test
-  script:
-    - cachix watch-exec $CACHIX_CACHE_NAME -- nix develop .#$PROJECT_NAME -c dune runtest
