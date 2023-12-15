@@ -1,19 +1,21 @@
 stages:
-  - build
+  - build_app
+  - build_image
 
 variables:
   CACHIX_CACHE_NAME: midorishibukawa-ml
+  DOCKER_USERNAME: midorishibukawa
   PROJECT_NAME: advent_of_code
   IMAGE_TAG: 0.day4
   
-.before_script_template:
+.before_script_cachix:
   before_script:
     - nix profile install --accept-flake-config nixpkgs#cachix
     - cachix use "$CACHIX_CACHE_NAME"
 
 build:
-  extends: .before_script_template
-  stage: build
+  extends: .before_script_cachix
+  stage: build_app
   artifacts:
     paths:
       - advent_of_code
@@ -22,3 +24,13 @@ build:
     - cachix watch-exec $CACHIX_CACHE_NAME -- nix build
     - cp ./result/bin/$PROJECT_NAME .
 
+build_docker:
+  image: docker
+  services:
+    - docker:dind
+  stages: build_image
+  before_script:
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+  script: 
+    - docker build -t "$DOCKER_USERNAME"/"$PROJECT_NAME":"$IMAGE_NAME" .
+    - docker push "$DOCKER_USERNAME"/"$PROJECT_NAME":"$IMAGE_NAME"
