@@ -28,7 +28,7 @@ build_docker:
   image: docker
   services:
     - docker:dind
-  stages: build_image
+  stage: build_image
   before_script:
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
   script: 
