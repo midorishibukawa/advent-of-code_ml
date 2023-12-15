@@ -14,6 +14,7 @@ variables:
     - cachix use "$CACHIX_CACHE_NAME"
 
 build:
+  image: nixpkgs/nix-flakes:latest
   extends: .before_script_cachix
   stage: build_app
   artifacts:
