@@ -34,4 +34,4 @@ build_docker:
     - docker login -u $DOCKER_USERNAME -p $DOCKER_REGISTRY_TOKEN
   script: 
     - docker build -t "$DOCKER_USERNAME/$PROJECT_NAME:$IMAGE_TAG" .
-    - docker push "$DOCKER_USENAME/$PROJECT_NAME:$IMAGE_TAG"
+    - docker push "$DOCKER_USERNAME/$PROJECT_NAME:$IMAGE_TAG"
