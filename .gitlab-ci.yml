@@ -1,22 +1,28 @@
 stages:
-  - build
+  - test
 
 variables:
   CACHIX_CACHE_NAME: midorishibukawa-ml
+  PROJECT_NAME: advent_of_code
+  IMAGE_TAG: 0.4
   
 .before_script_template:
   before_script:
     - nix profile install --accept-flake-config nixpkgs#cachix
     - cachix use "$CACHIX_CACHE_NAME"
 
-test_n_build:
+build:
   extends: .before_script_template
-  stage: build
+  stage: test
   artifacts:
     paths:
       - advent_of_code
   script:
-    - cachix watch-exec $CACHIX_CACHE_NAME -- nix develop .#advent_of_code -c dune runtest
     - cachix watch-exec $CACHIX_CACHE_NAME -- nix build
-    - cp ./result/bin/advent_of_code .
+    - cp ./result/bin/$PROJECT_NAME .
 
+test:
+  extends: .before_script_template
+  stage: test
+  script:
+    - cachix watch-exec $CACHIX_CACHE_NAME -- nix develop .#$PROJECT_NAME -c dune runtest
