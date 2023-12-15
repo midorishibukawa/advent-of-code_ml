@@ -9,12 +9,14 @@ variables:
     - nix profile install --accept-flake-config nixpkgs#cachix
     - cachix use "$CACHIX_CACHE_NAME"
 
-build:
+test_n_build:
   extends: .before_script_template
   stage: build
   artifacts:
     paths:
-      - result/bin/advent_of_code
+      - advent_of_code
   script:
     - cachix watch-exec $CACHIX_CACHE_NAME -- nix develop .#advent_of_code -c dune runtest
     - cachix watch-exec $CACHIX_CACHE_NAME -- nix build
+    - cp ./result/bin/advent_of_code .
+
