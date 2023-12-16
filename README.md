@@ -13,7 +13,7 @@ the [bin](bin/) directory also provides a simple https web server written using 
 in order to run the server, you'll first need to install its dependencies. if you're using the [nix](https://nixos.org/) package manager, the `flake.nix` provided (credits to [opam-nix](https://github.com/tweag/opam-nix)) will setup everything for you by simply running the following command:
 
 ```
-nix develop .#advent_of_code
+nix develop
 ```
 
 otherwise, you'll need both [dune](https://dune.build/) and [opam](https://opam.ocaml.org/) installed on your system, as well as the following opam packages:
