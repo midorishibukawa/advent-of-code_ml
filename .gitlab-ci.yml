@@ -26,7 +26,7 @@ build:
     - cachix watch-exec $CACHIX_CACHE_NAME -- nix build
     - cp ./result/bin/$PROJECT_NAME .
 
-build_docker:
+.build_docker_tmp:
   stage: deploy
   dependencies: 
     - build
@@ -34,12 +34,22 @@ build_docker:
   services:
     - docker:dind
   before_script:
-    - docker login -u $DOCKER_USERNAME -p $DOCKER_REGISTRY_TOKEN
+    - docker login -u $REGISTRY/DOCKER_USERNAME -p $DOCKER_REGISTRY_TOKEN
   script: 
-    - docker build -t "$DOCKER_USERNAME/$PROJECT_NAME:$IMAGE_TAG" .
-    - docker push "$DOCKER_USERNAME/$PROJECT_NAME:$IMAGE_TAG"
+    - docker build -t "$REGISTRY$DOCKER_USERNAME/$PROJECT_NAME:$IMAGE_TAG" .
+    - docker push "$REGISTRY$DOCKER_USERNAME/$PROJECT_NAME:$IMAGE_TAG"
   only:
     - main
+
+build_docker:
+  extends: .build_docker_tmp
+  variables: 
+    REGISTRY: ""
+
+build_gitlab:
+  extends: .build_docker_tmp
+  variables: 
+    REGISTRY: registry.gitlab.com/
 
 deploy:
   stage: deploy
