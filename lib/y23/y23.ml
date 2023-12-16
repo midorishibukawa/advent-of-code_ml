@@ -6,6 +6,7 @@ let solved =
     ; Day03.solve 
     ; Day04.solve
     ; Day05.solve
+    ; Day06.solve
     ];;
 
 let solve n = List.at solved @@ n - 1
