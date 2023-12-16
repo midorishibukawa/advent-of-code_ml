@@ -27,11 +27,16 @@ let get_times tmax record =
 let rec solve ?(time=[]) ?(distance=[]) ?(phase=Time) ~bonus xs =
     let solve = solve ~bonus in 
     match xs with 
-    | [] -> List.fold_left2
-            (fun acc ts ds -> acc * get_times ts ds)
-            1
-            time 
-            distance
+    | [] -> if not bonus 
+            then 
+                List.fold_left2
+                (fun acc ts ds -> acc * get_times ts ds)
+                1
+                time 
+                distance
+            else 
+                let concat_nums nums = int_of_string @@ List.fold (fun acc num -> acc ^ string_of_int num) "" (List.rev nums) in
+                get_times (concat_nums time) (concat_nums distance)
     | ('\n'::xs') -> solve ~time ~phase:Distance xs'
     | (x::xs') ->
             if Char.is_digit x
