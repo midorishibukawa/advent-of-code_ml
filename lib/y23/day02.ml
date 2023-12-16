@@ -6,14 +6,6 @@ let cube_map = StringMap.of_list
     ; "green", 13
     ; "blue" , 14 ];;
 
-let rec get_num ?(n=0) xs =
-    match xs with
-    | [] -> (n, xs)
-    | (x::xs') ->
-        if Char.is_digit x
-        then get_num ~n:(n * 10 + (to_digit x)) xs'
-        else (n, xs);; 
-
 let get_colour_qty str =
     let colour = 
         try Enum.find (String.starts_with str) (StringMap.keys cube_map) 

@@ -41,7 +41,8 @@ let rec solve ?(y=0) ?(w=(-1)) ?(ws=IntSet.empty) ?(qs=[]) ?(num=0) ?(phase=Skip
             solve ~y:(y + get_dy w qs) ~qs:qs' ~phase:Skip xs'
     | (x::xs') -> 
             if Char.is_digit x 
-            then solve ~y ~w ~ws ~num:(num * 10 + to_digit x) ~qs ~phase xs' 
+            then let (num, xs') = get_num xs in
+                solve ~y ~w ~ws ~num ~qs ~phase xs' 
             else 
                 match phase with 
                 | Skip -> solve ~y ~qs ~phase xs'
