@@ -1,6 +1,9 @@
+image: nixpkgs/nix-flakes:latest
+
 stages:
   - build_app
   - build_image
+  - deploy
 
 variables:
   CACHIX_CACHE_NAME: midorishibukawa-ml
@@ -14,9 +17,8 @@ variables:
     - cachix use "$CACHIX_CACHE_NAME"
 
 build:
-  image: nixpkgs/nix-flakes:latest
-  extends: .before_script_cachix
   stage: build_app
+  extends: .before_script_cachix
   artifacts:
     paths:
       - advent_of_code
@@ -26,12 +28,19 @@ build:
     - cp ./result/bin/$PROJECT_NAME .
 
 build_docker:
+  stage: build_image
   image: docker
   services:
     - docker:dind
-  stage: build_image
   before_script:
     - docker login -u $DOCKER_USERNAME -p $DOCKER_REGISTRY_TOKEN
   script: 
     - docker build -t "$DOCKER_USERNAME/$PROJECT_NAME:$IMAGE_TAG" .
     - docker push "$DOCKER_USERNAME/$PROJECT_NAME:$IMAGE_TAG"
+
+deploy:
+  stage: deploy
+  before_script:
+    - nix profile install --accept-flake-config nixkpkgs$flyctl
+  script:
+    - flyctl deploy

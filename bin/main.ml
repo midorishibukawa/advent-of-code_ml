@@ -13,7 +13,7 @@ let () =
         match D.header req "HX-Request" with
         | None   -> D.html @@ T.page ~title:"advent of code" ~nav ~body
         | Some _ -> D.html body in
-    D.run ~tls:true ~port:8080 ~interface:"0.0.0.0"
+    D.run ~port:8080 ~interface:"0.0.0.0"
     @@ D.logger 
     @@ D.memory_sessions
     @@ D.router [
