@@ -6,7 +6,7 @@ this (2023) is my first year participating in the challenge while it's still ong
 
 you can find my solutions in the [lib](lib/) directory, grouped by year, or by clicking on the links at the bottom of this README. and you can have a look at the resulting web server [here](https://adventofcode.midori.shibukawa.io/).
 
-![christmas tofu](assets/tofu-natalino_s.png)
+![christmas tofu](assets/tofu-natalino_s.jpg)
 
 ## running the web server
 
