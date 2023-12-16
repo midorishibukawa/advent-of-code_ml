@@ -28,7 +28,8 @@ build:
 
 build_docker:
   stage: deploy
-  dependencies: build
+  dependencies: 
+    - build
   image: docker
   services:
     - docker:dind
@@ -42,7 +43,8 @@ build_docker:
 
 deploy:
   stage: deploy
-  dependencies: build
+  dependencies: 
+    - build
   before_script:
     - nix profile install nixpkgs$flyctl
   script:
