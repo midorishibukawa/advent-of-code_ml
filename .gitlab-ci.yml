@@ -41,6 +41,6 @@ build_docker:
 deploy:
   stage: deploy
   before_script:
-    - nix profile install --accept-flake-config nixkpkgs$flyctl
+    - nix profile install --accept-flake-config nixpkgs$flyctl
   script:
     - flyctl deploy
