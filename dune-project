@@ -11,7 +11,7 @@
 
 (maintainers "midorishibukawa")
 
-(license "GPL-3.0-only")
+(license "GPL-3.0-or-later")
 
 ; (documentation https://url/to/documentation)
 

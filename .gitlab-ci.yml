@@ -1,0 +1,53 @@
+image: nixpkgs/nix-flakes:latest
+
+stages:
+  - build_app
+  - deploy
+
+variables:
+  CACHIX_CACHE_NAME: midorishibukawa-ml
+  DOCKER_USERNAME: midorishibukawa
+  PROJECT_NAME: advent_of_code
+  IMAGE_TAG: 0.day4
+  
+.before_script_cachix:
+  before_script:
+    - nix profile install --accept-flake-config nixpkgs#cachix
+    - cachix use "$CACHIX_CACHE_NAME"
+
+build:
+  stage: build_app
+  extends: .before_script_cachix
+  artifacts:
+    paths:
+      - advent_of_code
+  script:
+    - cachix watch-exec $CACHIX_CACHE_NAME -- nix develop -c dune runtest
+    - cachix watch-exec $CACHIX_CACHE_NAME -- nix build .#prd
+    - cp ./result/bin/$PROJECT_NAME .
+
+build_docker:
+  stage: deploy
+  dependencies: 
+    - build
+  image: docker
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_REGISTRY_TOKEN
+  script: 
+    - docker build -t "$DOCKER_USERNAME/$PROJECT_NAME:$IMAGE_TAG" .
+    - docker push "$DOCKER_USERNAME/$PROJECT_NAME:$IMAGE_TAG"
+  only:
+    - main
+
+deploy:
+  stage: deploy
+  dependencies: 
+    - build
+  before_script:
+    - nix profile install nixpkgs#flyctl
+  script:
+    - flyctl deploy
+  only:
+    - main

@@ -21,12 +21,14 @@
           ## You can force versions of certain packages here, e.g:
           ## - force the ocaml compiler to be taken from opam-repository:
           ocaml-base-compiler = "*";
+          ocaml-lsp-server = "*";
           ## - or force the compiler to be taken from nixpkgs and be a certain version:
           # ocaml-system = "4.14.0";
           ## - or force ocamlfind to be a certain version:
           # ocamlfind = "1.9.2";
         };
         scope = on.buildOpamProject' { } ./. query;
+        prdScope = on.buildOpamProject' { pkgs = pkgs.pkgsStatic; } ./. query;
         overlay = final: prev: {
           # You can add overrides here
           ${package} = prev.${package}.overrideAttrs (_: {
@@ -35,15 +37,22 @@
           });
         };
         scope' = scope.overrideScope' overlay;
+        prdScope' = prdScope.overrideScope' overlay;
         # The main package containing the executable
         main = scope'.${package};
+        prd = prdScope'.${package};
         # Packages from devPackagesQuery
         devPackages = builtins.attrValues
           (pkgs.lib.getAttrs (builtins.attrNames devPackagesQuery) scope');
+        prdPackages = builtins.attrValues
+          (pkgs.lib.getAttrs (builtins.attrNames devPackagesQuery) prdScope');
       in {
         legacyPackages = scope';
 
-        packages.default = main;
+        packages = {
+            default = main;
+            prd = prd;
+        };
 
         devShells.default = pkgs.mkShell {
           inputsFrom = [ main ];
