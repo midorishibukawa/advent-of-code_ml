@@ -44,7 +44,7 @@ deploy:
   stage: deploy
   depends: build
   before_script:
-    - nix profile install --accept-flake-config nixpkgs$flyctl
+    - nix profile install nixpkgs$flyctl
   script:
     - flyctl deploy
   only:
