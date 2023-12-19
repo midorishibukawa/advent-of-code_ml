@@ -45,7 +45,7 @@ the web server is set up to listen on `https://localhost:8080`
 | SUN | MON | TUE | WED | THU | FRI | SAT |
 |-----|-----|-----|-----|-----|-----|-----|
 |     |     |     |     |     |[01★★](lib/y23/day01.ml)|[02★★](lib/y23/day02.ml)|
-|[03★★](lib/y23/day03.ml)|[04★★](lib/y23/day04.ml)|[05★☆](lib/y23/day05.ml)|[06★★](lib/y23/day06.ml)|[07★☆](lib/y23/day07.ml)|[08★☆](lib/y23/day08.ml)| 09☆☆|
+|[03★★](lib/y23/day03.ml)|[04★★](lib/y23/day04.ml)|[05★☆](lib/y23/day05.ml)|[06★★](lib/y23/day06.ml)|[07★☆](lib/y23/day07.ml)|[08★☆](lib/y23/day08.ml)|[09★☆](lib/y23/day09.ml)|
 | 10☆☆| 11☆☆| 12☆☆| 13☆☆| 14☆☆| 15☆☆| 16☆☆|
 | 17☆☆| 18☆☆| 19☆☆| 20☆☆| 21☆☆| 22☆☆| 23☆☆|
 | 24☆☆| 25☆☆|     |     |     |     |     |
