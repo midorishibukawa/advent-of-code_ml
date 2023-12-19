@@ -22,10 +22,11 @@ let rec parse_dif ?(acc=0) xs =
     then acc + num
     else parse_dif ~acc:(acc + num) dif
 
-let solve ~bonus:_ str =
+let solve ~bonus str =
     str 
     |> String.split_on_char '\n'
     |> List.map (String.split_on_char ' ')
     |> List.map (List.map String.to_list)
     |> List.map (List.map (fun l -> let (num, _) = get_num l in num))
+    |> List.map (if bonus then List.rev else Fun.id)
     |> List.fold(fun acc l -> acc + parse_dif l) 0
