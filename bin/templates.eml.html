@@ -3,9 +3,6 @@ let page ~title ~nav ~body =
     <html lang="en">
     <head>
         <title><%s title %></title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="./static/style.css">
         <script src="https://unpkg.com/htmx.org@1.9.2"
                 integrity="sha384-L6OqL9pRWyyFU3+/bjdSri+iIphTN/bvYyM37tICVyOJkWZLpP2vGn6VUEXgzg6h" 
@@ -22,11 +19,11 @@ let page ~title ~nav ~body =
 
 let nav ps =
     <nav>
-%   ps |> List.iter begin fun (p, disabled) ->
+%   ps |> List.iter begin fun (p, cs) ->
         <a href="<%s p %>"
             hx-boost="true"
             hx-target="main"
-            <%s if disabled then "class=disabled" else "" %>
+            <%s cs  %>
             >
             <%s p %>
         </a>

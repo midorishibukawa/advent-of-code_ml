@@ -3,10 +3,12 @@ module S = Static
 module T = Templates
 open Batteries
 
+let to_class cs = "class=" ^ String.join " " cs;;
+
 let () =
     let nav = 
         (1--25) 
-        |> Enum.map (fun x -> (string_of_int x, x > List.length Y23.solved)) 
+        |> Enum.map (fun x -> (string_of_int x, to_class @@ if x <= List.length Y23.solved then ["solved"] else [] )) 
         |> List.of_enum 
         |> T.nav in
     let handle_htmx ~req body =

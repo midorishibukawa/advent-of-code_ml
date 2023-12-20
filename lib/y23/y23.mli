@@ -1,4 +1,4 @@
-val solved : (bonus:bool -> string -> int) list
+val solved : ((bonus:bool -> string -> int) * bool) list
 (** [Y23.solved] returns a list of every solution implemented so far *)
 
 val solve : int -> bonus:bool -> string -> int
