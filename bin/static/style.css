@@ -21,7 +21,6 @@ body {
     display: grid;
     place-items: start center;
     height: 100%;
-    width: 100%;
     max-width: 720px;
     grid-template:
     "title" fit-content(100%)
@@ -40,7 +39,7 @@ main {
 
 h1 {
     font-size: 3rem;
-    padding: 1rem;
+    padding: 1rem 0rem;
 }
 
 form {
@@ -56,28 +55,26 @@ nav {
     gap: 4px;
     padding: 4px;
     border-radius: 4px;
-}
-
-nav > a {
-    display: grid;
-    width: 3rem;
-    height: 2.5rem;
-    place-items: center;
-    text-decoration: none;
-    border-radius: 4px;
-    color: var(--fg-subtle);
-    border: 1px solid;
-    transition: 1s;
-    font-weight: 200;
-    pointer-events: none;
-    text-decoration: none;
-}
-
-nav > a.solved {
-    pointer-events: auto;
-    border-width: 2px;
-    font-weight: 700;
-    animation: glow 4s infinite;
+    & a {
+        display: grid;
+        width: 3rem;
+        height: 2.5rem;
+        place-items: center;
+        text-decoration: none;
+        border-radius: 4px;
+        color: var(--fg-subtle);
+        border: 1px solid;
+        transition: 1s;
+        font-weight: 200;
+        pointer-events: none;
+        text-decoration: none;
+        &.solved {
+            pointer-events: auto;
+            border-width: 2px;
+            font-weight: 700;
+            animation: glow 4s infinite;
+        }
+    }
 }
 
 @keyframes glow {
@@ -102,4 +99,16 @@ button {
     border-radius: 4px;
     color: var(--bg);
     min-height: 32px;
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 416px) {
+    h1 {
+        font-size: 2rem;
+    }
 }

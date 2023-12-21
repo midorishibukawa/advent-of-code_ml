@@ -19,7 +19,13 @@
  (name advent_of_code)
  (synopsis "My advent of code solutions")
  (description "my advent of code solutions")
- (depends ocaml batteries dune dream crunch ppx_inline_test)
+ (depends 
+   batteries 
+   crunch 
+   dream 
+   dune 
+   ocaml 
+   ppx_inline_test)
  (tags
   (topics "advent of code")))
 
