@@ -5,11 +5,9 @@ open Batteries
 
 let () =
     let get_solved_bonus day =
-        let is_solved = day <= List.length Y23.solved in
-        if not is_solved 
+        if day > List.length Y23.solved
         then (false, false)
         else let (_, is_bonus) = List.at Y23.solved (day - 1) in (true, is_bonus) in
-
     let nav = 
         (1--25) 
         |> Enum.map (fun x ->
@@ -41,7 +39,7 @@ let () =
             try 
                 let day' = int_of_string day - 1 in 
                 if day' >= 0 && day' < List.length Y23.solved 
-                then let (_, bonus) = get_solved_bonus day' in
+                then let (_, bonus) = get_solved_bonus (day' + 1) in
                     handle_htmx ~req @@ T.form ~endpoint:day ~bonus ~req
                 else raise Not_found 
             with _ -> D.html ~status:`Not_Found "");
