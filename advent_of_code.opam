@@ -12,6 +12,7 @@ depends: [
   "batteries"
   "crunch"
   "dream"
+  "dream-html"
   "dune" {>= "3.12"}
   "ocaml"
   "ppx_inline_test"
