@@ -33,7 +33,7 @@ let nav days =
             ; class_ "%s" @@ get_class is_solved is_bonus 
             ; boost true 
             ; target "main" ] 
-            [ txt "%s" day ]) 
+            [ txt "%s" @@ day ])
     days;;
 
 let p ctt = p [] [ txt "%s" ctt ]

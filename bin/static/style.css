@@ -71,20 +71,20 @@ nav {
         pointer-events: none;
         text-decoration: none;
         &.solved {
-            background-color: var(--fg);
+            --fade: var(--fg-dark);
+            --normal: var(--fg);
             color: var(--bg);
             pointer-events: auto;
             border-width: 2px;
             font-weight: 900;
             animation: glow 6s infinite;
             &:hover {
-                animation: glow 1s infinite;
+                animation: glow 1s infinite !important;
             }
             &.bonus {
-                animation: glow-y 4s infinite;
-                &:hover {
-                    animation: glow-y 1s infinite;
-                }
+                --fade: var(--gold-dark);
+                --normal: var(--gold);
+                animation: glow 4s infinite;
             }
         }
     }
@@ -119,18 +119,10 @@ button {
 
 @keyframes glow {
   0%, 100% {
-      background-color: var(--fg-dark);
+      background-color: var(--fade);
   }
   50% {
-      background-color: var(--fg);
-  }
-}
-@keyframes glow-y {
-  0%, 100% {
-      background-color: var(--gold-dark);
-  }
-  50% {
-      background-color: var(--gold);
+      background-color: var(--normal);
   }
 }
 
