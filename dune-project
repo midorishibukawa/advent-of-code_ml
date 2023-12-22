@@ -22,7 +22,8 @@
  (depends 
    batteries 
    crunch 
-   dream 
+   dream
+   dream-html
    dune 
    ocaml 
    ppx_inline_test)
