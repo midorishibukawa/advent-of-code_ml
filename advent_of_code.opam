@@ -9,11 +9,12 @@ tags: ["topics" "advent of code"]
 homepage: "https://github.com/midorishibukawa/advent-of-code_ml"
 bug-reports: "https://github.com/midorishibukawa/advent-of-code_ml/issues"
 depends: [
-  "ocaml"
   "batteries"
-  "dune" {>= "3.12"}
-  "dream"
   "crunch"
+  "dream"
+  "dream-html"
+  "dune" {>= "3.12"}
+  "ocaml"
   "ppx_inline_test"
   "odoc" {with-doc}
 ]
